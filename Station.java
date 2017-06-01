@@ -16,7 +16,7 @@ public class Station{
           this.size = 1;
           this.people = 0;
           this.interchange = false;
-          lines = new ArrayList<Line> lines;
+          lines = new ArrayList<Line>();
         }
         public void addPeople(int people){
           if(people < 0){
