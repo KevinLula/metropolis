@@ -47,7 +47,7 @@ public class Station{
       return false;
     }
   }
-  public void removeLines(Line line){
+  public boolean removeLines(Line line){
     if(lines.indexOf(line) != -1){
       lines.remove(line);
       return true;
