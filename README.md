@@ -14,6 +14,7 @@ The train stimulation game is based off the game Mini Metro by the New Zealand g
 - [ ] Code coverage
 - [ ] Licensing
 - [x] README & devlog
+
 Friday June 2nd - did work on Station and People classes
 ## Features
 soon to come.
