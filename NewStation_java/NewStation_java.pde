@@ -23,7 +23,7 @@ for(int x = 3; x > 0; x--){
 
 void draw(){
   int shape;
-  if(second() % 20 == 0){
+  if(int(random(200)) == 0){
   shape = int(random(3));
   if(shape == 0){
     fill(0);
@@ -38,6 +38,5 @@ void draw(){
     int triY = int(random(500));
     triangle(triX, triY, triX + 20, triY + 20, triX + 20, triY);
   }
-  }
-  delay(1000);
+}
 }
