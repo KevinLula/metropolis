@@ -9,8 +9,8 @@ color back = 0;
 color start;
 // Make an array of lines that is added to with the mousePressed and then make their storke weight 0 when drawLine is called;
 
+
 void setup(){
-  background(255);
   size(800,800);
 int shape;
 for(int x = 3; x > 0; x--){
@@ -55,12 +55,11 @@ void draw(){
  if(mousePressed){
     if(startLineX == 0.0 && startLineY == 0.0){
       startLineX = mouseX; startLineY = mouseY;
-      start = get(int(mouseX), int(mouseY));
-    }
-    stroke(0);
-    strokeWeight(2);      
-    line(mouseX, mouseY, pmouseX, pmouseY);      
-  }
+}
+  stroke(0);
+  strokeWeight(2);
+  line(mouseX, mouseY, pmouseX, pmouseY);
+}
   if(!mousePressed){
     endLineX = mouseX;
     endLineY = mouseY;    
@@ -68,12 +67,12 @@ void draw(){
     color current2 = get(int(endLineX) + 1, int(endLineY));
     color current3 = get(int(endLineX), int(endLineY) + 1);
     color current4 = get(int(endLineX) + 1, int(endLineY) + 1);
-    if(startLineX != 0.0 && startLineY != 0.0 /*&& (current == back || current2 == back || current3 == back || current4 == back) */){
+    if(startLineX != 0.0 && startLineY != 0.0 /* (current == back || current2 == back || current3 == back || current4 == back) */){
       drawLine();
     }
   }
 }
-
+  
   void drawLine(){
   stroke(0);
   strokeWeight(5);
