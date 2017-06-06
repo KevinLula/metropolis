@@ -1,6 +1,6 @@
 PShape rectangle;
 int time;
-Clock(){
+public Clock(){
   time = 0; // we'll just use iterations. 60 iterations = 1hr
 }  
 public void createClock(){
