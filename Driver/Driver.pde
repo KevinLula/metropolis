@@ -1,10 +1,12 @@
+//Clock time;
 void settings(){
   fullScreen();
 }  
 void setup(){
-  createClock();
+  //time = new Clock();
+  clockSetup();
 }
 void draw(){
   background(255);
-  rotate();
+  tick();
 }  

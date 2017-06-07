@@ -1,18 +1,22 @@
 PShape rectangle;
-int time;
 String day;
-public Clock(){
-}  
-public void clockSetup(){
-    time = 0; // we'll just use iterations. 60 iterations = 1hr
-    day = "Monday";
-    rectangle = createShape(RECT, 0, 0, 25, 1);
-    rectangle.setFill(color(0,0,0));
-}
+int date;
+int time;
 
-public void tick(){
+void setup(){
+  size(800,800);
+  fill(255);
+  ellipse(100,100,60,60);
+  rectangle = createShape(RECT, 0, 0, 19, 1);
+  rectangle.setFill(color(0,0,0));
+  day = "Monday";
+  time = 0;
+}
+void draw(){ 
+   background(255);
+    fill(255);
     ellipse(100,100,60,60);
-    shape(rectangle, 100, 100);
+    fill(0);
     textSize(9);
     text("12",95,79);
     text("1",110,85);
@@ -47,7 +51,7 @@ public void tick(){
     }
     else{day = "Monday";
     }
-    text(day,20,20);
-  rectangle.rotate(0.03);
-  delay(100);
-}    
+    text(day,20,20);      
+    shape(rectangle, 100, 100);
+    rectangle.rotate(0.03);
+}
