@@ -1,5 +1,5 @@
 PShape square, circle, triangle;
-int time = 0;
+int timez = 0;
 float startLineX = 0.0;
 float startLineY= 0.0;
 float endLineX = 0.0;
@@ -9,46 +9,23 @@ color back = 0;
 color start;
 // Make an array of lines that is added to with the mousePressed and then make their storke weight 0 when drawLine is called;
 
-
-void setup(){
-  size(800,800);
-int shape;
-for(int x = 3; x > 0; x--){
-  shape = int(random(3));
-  if(shape == 0){
-    fill(0);
-    rect(int(random(500)), int(random(500)), 20, 20);
-  }
-  else if(shape == 1){
-    fill(0);
-    ellipse(int(random(500)), int(random(500)), 20, 20);
-  }
-  else{
-    fill(0);
-    int triX = int(random(500));
-    int triY = int(random(500));
-    triangle(triX, triY, triX + 20, triY + 20, triX + 20, triY);
-  }
-}
-}
-
-void draw(){
+void makeStations(){
   int shape;
-  time++;
-  if(time % 1500 == 0){
+  timez++;
+  if(timez % 1500 == 0){
   shape = int(random(3));
   if(shape == 0){
     fill(0);
-    rect(int(random(500)), int(random(500)), 20, 20);
+    rect(int(random(width)), int(random(height)), 20, 20);
   }
   else if(shape == 1){
     fill(0);
-    ellipse(int(random(500)), int(random(500)), 20, 20);
+    ellipse(int(random(width)), int(random(height)), 20, 20);
   }
   else{
     fill(0);
-    int triX = int(random(500));
-    int triY = int(random(500));
+    int triX = int(random(width));
+    int triY = int(random(height));
     triangle(triX, triY, triX + 20, triY + 20, triX + 20, triY);
   }
   }

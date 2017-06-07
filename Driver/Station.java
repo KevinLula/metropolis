@@ -2,20 +2,22 @@ import java.util.Random;
 import java.util.ArrayList;
 public class Station{
   private int size, x, y, people;
+  private String name;
   private boolean interchange;
   private ArrayList<Line> lines;
   private static Random rand = new Random();
 
-  public Station(){
-    this(rand.nextInt(100), rand.nextInt(100));
+  public Station(String name){
+    this(rand.nextInt(100), rand.nextInt(100), name);
   }
 
-  public Station(int x, int y){
+  public Station(int x, int y, String name){
     this.x = x;
     this.y = y;
     this.size = 1;
     this.people = 0;
     this.interchange = false;
+    this.name = name;
     lines = new ArrayList<Line>();
   }
   public void addPeople(int people){
@@ -56,4 +58,7 @@ public class Station{
       return false;
     }
   }
+  public int compareTo(Station other){
+    return 0; // for now, will use if the interactive selective function of line doesn't work
+  }  
 }
