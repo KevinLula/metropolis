@@ -48,6 +48,5 @@ public void tick(){
     else{day = "Monday";
     }
     text(day,20,20);
-    rectangle.rotate(0.03);
-    delay(100);
+    rectangle.rotate(0.031);
 }    
