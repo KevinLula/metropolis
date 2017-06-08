@@ -11,7 +11,7 @@ ArrayList<Station> stations;
 
 void settings(){
   fullScreen();
-}  
+}
 void setup(){
   //time = new Clock();
   clockSetup();
@@ -20,12 +20,12 @@ void setup(){
 void draw(){
   if(!day.equals(previousDay)){
     stations.add(new Station((int)random(width), (int)random(height), streets[(int)random(46)], (int)random(3)));
-  }  
+  }
   background(255);
-  tick();
   for(Station i : stations){
     makeStation(i.getX(), i.getY(), i.getType()); // param three is type
-  }  
+  }
   makeStations();
   previousDay = day;
-}  
+  tick();
+}

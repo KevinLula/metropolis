@@ -76,4 +76,3 @@ void makeStations(){
   endLineX = 0.0;
   endLineY = 0.0;
   }
-   
