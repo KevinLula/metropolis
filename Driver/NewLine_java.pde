@@ -30,10 +30,6 @@ float endLineY = 0.0;
   strokeWeight(5);
   line(startLineX, startLineY, endLineX, endLineY);
   rect(int((startLineX + endLineX) / 2) - 4, int((startLineY + endLineY) / 2) - 4, 7, 7);
-  startLineX = 0.0;
-  startLineY = 0.0;
-  endLineX = 0.0;
-  endLineY = 0.0;
   }
   
   int getStartLineX(){
@@ -50,4 +46,20 @@ float endLineY = 0.0;
   
   int getEndLineY(){
     return (int)endLineY;
+  }
+  
+  void setStartLineX(int sx){
+    startLineX = (float)sx;
+  }
+  
+  void setStartLineY(int sy){
+    startLineY = (float)sy;
+  }
+  
+  void setEndLineX(int sx){
+    endLineX = (float)sx;
+  }
+  
+  void setEndLineY(int sy){
+    endLineY = (float)sy;
   }

@@ -19,6 +19,7 @@ void setup(){
   //time = new Clock();
   clockSetup();
   stations = new ArrayList<Station>();
+  rails = new ArrayList<Line>();
 }
 void draw(){
   if(!day.equals(previousDay)){
