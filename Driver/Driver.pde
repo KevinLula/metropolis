@@ -8,6 +8,9 @@ String[] streets = {"Kendall St","Cannonball Lane","Birch St","Times Square","Lo
 "Marina Av","Capital St","Flushing/Main St","63rd Drive/Rego Park", "Heller St", "da Bronx", "Hippiesville","South Station","Penn Station","Central Park","Flushing Meadows/114 St","Hastings St.","Grand Central/42nd St"};
 ArrayList<Station> stations;
 ArrayList<Line> rails;
+boolean firstStat = false;
+boolean secondStat = false;
+boolean alreadyTried = false;
 
 void settings(){
   fullScreen();
@@ -30,7 +33,19 @@ void draw(){
   }
   drawLines();
   if(getEndLineX() != 0){
+    for(Station i : stations){
+      if((Math.abs(i.getX() - getStartLineX()) < 5) && (Math.abs(i.getY() - getStartLineY()) < 5)){
+        firstStat = true;
+        alreadyTried = true;
+      }
+      if((Math.abs(i.getX() - getEndLineX()) < 5) && (Math.abs(i.getY() - getEndLineY()) < 5) && !alreadyTried){
+        secondStat = true;
+      }
+      alreadyTried = false;
+    }
+    if(firstStat && secondStat){
     rails.add(new Line(0, 0, 0, getStartLineX(), getStartLineY(), getEndLineX(), getEndLineY()));
+    }
   }
   previousDay = day;
   strokeWeight(2);
