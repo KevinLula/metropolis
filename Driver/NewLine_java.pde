@@ -12,7 +12,9 @@ float endLineY = 0.0;
   strokeWeight(2);
   line(mouseX, mouseY, pmouseX, pmouseY);
 }
-  if(!mousePressed){
+ }
+
+ void mouseReleased(){
     endLineX = mouseX;
     endLineY = mouseY;
     color current = get(int(endLineX), int(endLineY));
@@ -23,7 +25,6 @@ float endLineY = 0.0;
       drawLine();
     }
   }
-}
 
   void drawLine(){
   stroke(0);
