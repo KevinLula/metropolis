@@ -30,16 +30,16 @@ void draw(){
     makeStation(i.getX(), i.getY(), i.getType()); // param three is type
   }
   for(int x = 0; x < rails.size(); x++){
-    line(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY());
+    drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY());
   }
   drawLines();
   if(getEndLineX() != 0){
     for(Station i : stations){
-      if((Math.abs(i.getX() - getStartLineX()) < 5) && (Math.abs(i.getY() - getStartLineY()) < 5)){
+      if((abs(i.getX() - getStartLineX()) < 15) && (abs(i.getY() - getStartLineY()) < 15)){
         firstStat = true;
         alreadyTried = true;
       }
-      if((Math.abs(i.getX() - getEndLineX()) < 5) && (Math.abs(i.getY() - getEndLineY()) < 5) && !alreadyTried){
+      if((abs(i.getX() - getEndLineX()) < 15) && (abs(i.getY() - getEndLineY()) < 15) && !alreadyTried){
         secondStat = true;
       }
       alreadyTried = false;
@@ -51,6 +51,8 @@ void draw(){
     setStartLineY(0);
     setEndLineX(0);
     setEndLineY(0);
+    firstStat = false;
+    secondStat = false;
   }
   previousDay = day;
   strokeWeight(2);
