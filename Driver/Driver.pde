@@ -47,6 +47,10 @@ void draw(){
     if(firstStat && secondStat){
     rails.add(new Line(0, 0, 0, getStartLineX(), getStartLineY(), getEndLineX(), getEndLineY()));
     }
+    setStartLineX(0);
+    setStartLineY(0);
+    setEndLineX(0);
+    setEndLineY(0);
   }
   previousDay = day;
   strokeWeight(2);
