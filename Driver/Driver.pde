@@ -50,7 +50,7 @@ void draw(){
     makeStation(i.getX(), i.getY(), i.getType()); // param three is type
   }
   for(int x = 0; x < rails.size(); x++){
-    drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY());
+    drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY(), rails.get(x).getColor1(), rails.get(x).getColor2(), rails.get(x).getColor3());
   }
 //  for(int x = 0; x < rivers.size()){
 //    drawLine(
@@ -74,7 +74,7 @@ void draw(){
       alreadyTried = false;
     }
     if(firstStat && secondStat){
-    rails.add(new Line(0, 0, 0, firstStatX, firstStatY, secondStatX, secondStatY));
+    rails.add(new Line(int(random(256)), int(random(256)), int(random(256)), firstStatX, firstStatY, secondStatX, secondStatY));
     rails.get(rails.size() - 1).addStation(firstStats);
     rails.get(rails.size() - 1).addStation(secondStats);
     firstStats.addLines(rails.get(rails.size() - 1));
@@ -110,7 +110,7 @@ void draw(){
       alreadyTried = false; 
       }
     if(firstStat && secondStat){
-    rails.add(new Line(0, 0, 0, firstStatX, firstStatY, secondStatX, secondStatY));
+    rails.add(new Line(int(random(256)), int(random(256)), int(random(256)), firstStatX, firstStatY, secondStatX, secondStatY));
     firstStats.addLines(rails.get(rails.size() - 1));
     secondStats.addLines(rails.get(rails.size() - 1));
     }
@@ -155,6 +155,7 @@ void draw(){
   }
   }
   strokeWeight(2);
+  stroke(0);
   ellipse(width / 2, height - 230, 20 ,20);
   previousDay = day;
   tick();   
