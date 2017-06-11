@@ -32,10 +32,11 @@ void setup(){
 //    rivers.add(new River(0, (int)random(height), 25);
 //  }
   if(screens.size() < 1){
-    screens.add(new UpgradeScreen(0,0,0,0));
+    screens.add(new UpgradeScreen(0,3,0,0));
   }
 }
 void draw(){
+  int howManyRails = rails.size();
   if(!day.equals(previousDay)){
     stations.add(new Station((int)random(width), (int)random(height), streets[(int)random(46)], (int)random(3)));
   }
@@ -48,6 +49,7 @@ void draw(){
   }
 //  for(int x = 0; x < rivers.size()){
 //    drawLine(
+  if(screens.get(0).getRail() > 0){
   drawLines();
   if(getEndLineX() != 0){
     for(Station i : stations){
@@ -74,8 +76,17 @@ void draw(){
     firstStat = false;
     secondStat = false;
   }
+  }
   for(int x = 0; x < screens.size(); x++){
-  drawScreen(screens.get(x).getTunnels(), screens.get(x).getRail(), screens.get(x).getXtraCar(), screens.get(x).getXtraTrain());
+  useUpgrades(screens.get(x).getTunnels(), screens.get(x).getXtraCar(), screens.get(x).getXtraTrain());
+  int removedT = getRemovedT();
+  int removedC = getRemovedC();
+  int removedX = getRemovedX();
+  drawScreen(screens.get(x).getTunnels() - removedT, screens.get(x).getRail(), screens.get(x).getXtraCar() - removedC, screens.get(x).getXtraTrain() - removedX);
+  screens.get(x).removeTunnels(removedT);
+  screens.get(x).removeXtraCar(removedC);
+  screens.get(x).removeXtraTrain(removedX);
+  screens.get(x).removeRail(rails.size() - howManyRails);
   }
   strokeWeight(2);
   ellipse(width / 2, height - 230, 20 ,20);
