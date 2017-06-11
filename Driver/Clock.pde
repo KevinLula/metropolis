@@ -1,14 +1,15 @@
 PShape rectangle;
-int time;
 String day;
+int time = 0;
+
 public void clockSetup(){
-    time = 0; // we'll just use iterations. 60 iterations = 1hr
     day = "Monday";
     rectangle = createShape(RECT, 0, 0, 25, 1);
     rectangle.setFill(color(0,0,0));
 }
 
 public void tick(){
+    time ++;
     fill(255);
     ellipse(100,100,60,60);
     shape(rectangle, 100, 100);
@@ -27,22 +28,22 @@ public void tick(){
     text("10",77,93);
     text("11",83,85); 
     textSize(20);
-    if((second() / 7) % 7 == 2){
+    if(int(time / 410) % 7 == 2){
       day = "Tuesday";
     }
-    else if((second() / 7) % 7 == 3){
+    else if(int(time / 410) % 7 == 3){
       day = "Wednesday";
     }
-    else if((second() / 7) % 7 == 4){
+    else if(int(time / 410) % 7 == 4){
       day = "Thursday";
     }
-    else if((second() / 7) % 7 == 5){
+    else if(int(time / 410) % 7 == 5){
       day = "Friday";
     }
-    else if((second() / 7) % 7 == 6){
+    else if(int(time / 410) % 7 == 6){
       day = "Saturday";
     }
-    else if((second() / 7) % 7 == 0){
+    else if(int(time / 410) % 7 == 0){
       day = "Sunday";
     }
     else{day = "Monday";
