@@ -68,6 +68,11 @@ public class Station{
   public int getType(){
     return this.type;
   }
+  
+  public int getLineSize(){
+    return lines.size();
+  }
+  
   public int compareTo(Station other){
     return 0; // for now, will use if the interactive selective function of line doesn't work
   }
