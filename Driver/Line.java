@@ -35,7 +35,7 @@ public class Line{
     }
   }
   
-    int getStartX(){
+  int getStartX(){
     return (int)(startX);
   }
   
@@ -49,6 +49,18 @@ public class Line{
   
   int getEndY(){
     return (int)(endY);
+  }
+  
+  int getColor1(){
+    return color1;
+  }
+  
+  int getColor2(){
+    return color2;
+  }
+  
+  int getColor3(){
+    return color3;
   }
 }  
   
