@@ -18,12 +18,26 @@ boolean upgradeAdded = false;
 int firstStatX, firstStatY, secondStatX, secondStatY;
 int numRivers;
 int daysPassed;
+int choice = 0;
 
 void settings(){
   fullScreen();
 }
 
 void setup(){
+/*  if(rails.size() <= 3){
+    howManyRails = rails.size();
+  }
+  else{
+  for(int x = 0; x < rails.size(); x++){
+    for(int y = 1; y < rails.size(); y++){
+      if(rails.get(x).getColor1() - rails.get(y).getColor1() != 0 && rails.get(x).getColor2() - rails.get(y).getColor2() != 0 && rails.get(x).getColor3() - rails.get(y).getColor3() != 0){
+        howManyRails ++;
+      }
+    }
+  }
+  } */
+        
   //time = new Clock();
   clockSetup();
   stations = new ArrayList<Station>();
@@ -39,7 +53,7 @@ void setup(){
   }
 }
 void draw(){
-  int howManyRails = rails.size();
+  int howManyRails = 0;
   if(!day.equals(previousDay)){
     stations.add(new Station((int)random(width), (int)random(height), streets[(int)random(46)], (int)random(3)));
     daysPassed++;
@@ -79,6 +93,7 @@ void draw(){
     rails.get(rails.size() - 1).addStation(secondStats);
     firstStats.addLines(rails.get(rails.size() - 1));
     secondStats.addLines(rails.get(rails.size() - 1));
+    howManyRails++;
     }
     setStartLineX(0);
     setStartLineY(0);
@@ -91,10 +106,16 @@ void draw(){
   }
   }
   if(screens.get(0).getRail() == 0){
+    int c1 = 0;
+    int c2 = 0;
+    int c3 = 0;
     drawLines();
     if(getEndLineX() != 0){
       for(Station i : stations){
         if((abs(i.getX() - getStartLineX()) < 10) && (abs(i.getY() - getStartLineY()) < 10) && i.getLineSize() > 0){
+        c1 = i.getLines().get(choice).getColor1();
+        c2 = i.getLines().get(choice).getColor2();
+        c3 = i.getLines().get(choice).getColor3();
         firstStat = true;
         firstStats = i;
         firstStatX = i.getX();
@@ -110,9 +131,12 @@ void draw(){
       alreadyTried = false; 
       }
     if(firstStat && secondStat){
-    rails.add(new Line(int(random(256)), int(random(256)), int(random(256)), firstStatX, firstStatY, secondStatX, secondStatY));
+    rails.add(new Line(c1, c2, c3, firstStatX, firstStatY, secondStatX, secondStatY));
+    rails.get(rails.size() - 1).addStation(firstStats);
+    rails.get(rails.size() - 1).addStation(secondStats);
     firstStats.addLines(rails.get(rails.size() - 1));
     secondStats.addLines(rails.get(rails.size() - 1));
+    choice = 0;
     }
     setStartLineX(0);
     setStartLineY(0);
@@ -133,7 +157,7 @@ void draw(){
   screens.get(x).removeTunnels(removedT);
   screens.get(x).removeXtraCar(removedC);
   screens.get(x).removeXtraTrain(removedX);
-  screens.get(x).removeRail(rails.size() - howManyRails);
+  screens.get(x).removeRail(howManyRails);
   if(daysPassed % 14 == 0 && !upgradeAdded){
     int y = int(random(100));
     if(y < 20){
@@ -154,12 +178,23 @@ void draw(){
     }
   }
   }
-  strokeWeight(2);
   stroke(0);
+  strokeWeight(2);
   ellipse(width / 2, height - 230, 20 ,20);
   previousDay = day;
   tick();   
 }
+
+void keyReleased(){
+  choice++;
+}
+
+void keyPressed(){
+  if(key == 'r' || key == 'R'){
+    choice = 0;
+  }
+}
+  
 
 /* Right now an extra rail can be drawn from any station that has a rail going through it not just the endpoint of the rail so we have to fix that.
 This can be done by referring to the colors of the lines that will be changed later.
