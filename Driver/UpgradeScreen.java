@@ -29,20 +29,20 @@ public void addXtraCar(){
   xtraCar += 1;
 }
 
-public void removeTunnels(){
-  tunnels -= 1;
+public void removeTunnels(int remove){
+  tunnels -= remove;
 }
 
-public void removeRail(){
-  rail -= 1;
+public void removeRail(int remove){
+  rail -= remove;
 }
 
-public void removeXtraTrain(){
-  xtraTrain -= 1;
+public void removeXtraTrain(int remove){
+  xtraTrain -= remove;
 }
 
-public void removeXtraCar(){
-  xtraCar -= 1;
+public void removeXtraCar(int remove){
+  xtraCar -= remove;
 }
 
 public int getTunnels(){
