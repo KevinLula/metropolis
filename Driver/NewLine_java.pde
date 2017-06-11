@@ -18,14 +18,14 @@ float endLineY = 0.0;
     }
 
   void drawLine(){
-  stroke(0);
+  stroke(100);
   strokeWeight(5);
   line(startLineX, startLineY, endLineX, endLineY);
   rect(int((startLineX + endLineX) / 2) - 4, int((startLineY + endLineY) / 2) - 4, 7, 7);
   }
   
-  void drawLine(int startX, int startY, int endX, int endY){
-  stroke(0);
+  void drawLine(int startX, int startY, int endX, int endY, int strokeColor1, int strokeColor2, int strokeColor3){
+  stroke(strokeColor1, strokeColor2, strokeColor3);
   strokeWeight(5); 
   line(startX, startY, endX, endY);
   rect(int((startX + endX) / 2) - 4, int((startY + endY) / 2) - 4, 7, 7);
