@@ -12,9 +12,12 @@ ArrayList<Line> rails;
 ArrayList<UpgradeScreen> screens;
 boolean firstStat = false;
 boolean secondStat = false;
+Station firstStats, secondStats;
 boolean alreadyTried = false;
+boolean upgradeAdded = false;
 int firstStatX, firstStatY, secondStatX, secondStatY;
 int numRivers;
+int daysPassed;
 
 void settings(){
   fullScreen();
@@ -39,6 +42,8 @@ void draw(){
   int howManyRails = rails.size();
   if(!day.equals(previousDay)){
     stations.add(new Station((int)random(width), (int)random(height), streets[(int)random(46)], (int)random(3)));
+    daysPassed++;
+    upgradeAdded = false;
   }
   background(255);
   for(Station i : stations){
@@ -49,18 +54,20 @@ void draw(){
   }
 //  for(int x = 0; x < rivers.size()){
 //    drawLine(
-  if(screens.get(0).getRail() > 0){
+ if(screens.get(0).getRail() > 0){
   drawLines();
   if(getEndLineX() != 0){
     for(Station i : stations){
       if((abs(i.getX() - getStartLineX()) < 10) && (abs(i.getY() - getStartLineY()) < 10)){
         firstStat = true;
+        firstStats = i;
         firstStatX = i.getX();
         firstStatY = i.getY();
         alreadyTried = true;
       }
       if((abs(i.getX() - getEndLineX()) < 10) && (abs(i.getY() - getEndLineY()) < 10) && !alreadyTried){
         secondStat = true;
+        secondStats = i;
         secondStatX = i.getX();
         secondStatY = i.getY();
       }
@@ -68,6 +75,8 @@ void draw(){
     }
     if(firstStat && secondStat){
     rails.add(new Line(0, 0, 0, firstStatX, firstStatY, secondStatX, secondStatY));
+    firstStats.addLines(rails.get(rails.size() - 1));
+    secondStats.addLines(rails.get(rails.size() - 1));
     }
     setStartLineX(0);
     setStartLineY(0);
@@ -75,8 +84,44 @@ void draw(){
     setEndLineY(0);
     firstStat = false;
     secondStat = false;
+    firstStats = null;
+    secondStats = null;
   }
   }
+  if(screens.get(0).getRail() == 0){
+    drawLines();
+    if(getEndLineX() != 0){
+      for(Station i : stations){
+        if((abs(i.getX() - getStartLineX()) < 10) && (abs(i.getY() - getStartLineY()) < 10) && i.getLineSize() > 0){
+        firstStat = true;
+        firstStats = i;
+        firstStatX = i.getX();
+        firstStatY = i.getY();
+        alreadyTried = true;
+      }
+      if((abs(i.getX() - getEndLineX()) < 10) && (abs(i.getY() - getEndLineY()) < 10) && !alreadyTried){
+        secondStat = true;
+        secondStats = i;
+        secondStatX = i.getX();
+        secondStatY = i.getY();
+      }      
+      alreadyTried = false; 
+      }
+    if(firstStat && secondStat){
+    rails.add(new Line(0, 0, 0, firstStatX, firstStatY, secondStatX, secondStatY));
+    firstStats.addLines(rails.get(rails.size() - 1));
+    secondStats.addLines(rails.get(rails.size() - 1));
+    }
+    setStartLineX(0);
+    setStartLineY(0);
+    setEndLineX(0);
+    setEndLineY(0);
+    firstStat = false;
+    secondStat = false;
+    firstStats = null;
+    secondStats = null;
+  }
+  }          
   for(int x = 0; x < screens.size(); x++){
   useUpgrades(screens.get(x).getTunnels(), screens.get(x).getXtraCar(), screens.get(x).getXtraTrain());
   int removedT = getRemovedT();
@@ -87,9 +132,29 @@ void draw(){
   screens.get(x).removeXtraCar(removedC);
   screens.get(x).removeXtraTrain(removedX);
   screens.get(x).removeRail(rails.size() - howManyRails);
+  if(daysPassed % 14 == 0 && !upgradeAdded){
+    int y = int(random(100));
+    if(y < 20){
+      screens.get(x).addRail();
+      upgradeAdded = true;
+    }
+    else if(y >= 20 && x < 46){
+      screens.get(x).addTunnels();
+      upgradeAdded = true;
+    }
+    else if(y >= 46 && y < 73){
+      screens.get(x).addXtraTrain();
+      upgradeAdded = true;
+    }
+    else if(y >= 73 && y < 100){
+      screens.get(x).addXtraCar();
+      upgradeAdded = true;
+    }
+  }
   }
   strokeWeight(2);
   ellipse(width / 2, height - 230, 20 ,20);
   previousDay = day;
   tick();
+    
 }
