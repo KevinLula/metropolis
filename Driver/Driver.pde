@@ -75,6 +75,8 @@ void draw(){
     }
     if(firstStat && secondStat){
     rails.add(new Line(0, 0, 0, firstStatX, firstStatY, secondStatX, secondStatY));
+    rails.get(rails.size() - 1).addStation(firstStats);
+    rails.get(rails.size() - 1).addStation(secondStats);
     firstStats.addLines(rails.get(rails.size() - 1));
     secondStats.addLines(rails.get(rails.size() - 1));
     }
@@ -155,6 +157,10 @@ void draw(){
   strokeWeight(2);
   ellipse(width / 2, height - 230, 20 ,20);
   previousDay = day;
-  tick();
-    
+  tick();   
 }
+
+/* Right now an extra rail can be drawn from any station that has a rail going through it not just the endpoint of the rail so we have to fix that.
+This can be done by referring to the colors of the lines that will be changed later.
+Also we have to 
+*/
