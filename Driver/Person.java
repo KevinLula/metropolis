@@ -2,13 +2,15 @@ import java.util.Random;
 public class Person extends World{
   private static Random rand = new Random();
   private int satisfaction;
-  private Station current, dest;
+  private Station current
+  private String dest;
 
-  public Person(Station current, Station dest){
+  public Person(Station current, String dest){
     this.current = current;
     this.dest = dest;
     this.satisfaction = 100;
   }
+
 
   public void decreaseSatisfaction(int howMuch){
     if(howMuch < 0){

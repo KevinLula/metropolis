@@ -6,6 +6,7 @@ public class Station{
   private String name;
   private boolean interchange;
   private ArrayList<Line> lines;
+  private ArrayList<Person> persons;
   private static Random rand = new Random();
 
   public Station(String name, int type){
@@ -21,12 +22,16 @@ public class Station{
     this.name = name;
     this.type = type;
     lines = new ArrayList<Line>();
+    persons = new ArrayList<Person>();
   }
   public void addPeople(int people){
     if(people < 0){
       throw new IllegalArgumentException();
     }
     this.people += people;
+    for(int i = 0; i < people; i++){
+      persons.add(new Person(this, ));
+    }
   }
   public void removePeople(int people){
     if(this.people - people < 0){

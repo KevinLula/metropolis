@@ -21,7 +21,7 @@ int daysPassed;
 int choice = 0;
 int trains;
 int days;
-int trainAddRate, speed;
+int trainAddRate, speed, pool;
 
 void settings(){
   fullScreen();
@@ -30,13 +30,14 @@ void settings(){
 void setup(){
 star = loadImage("star.png");
 plus = loadImage("plus.png");
-        
+
   //time = new Clock();
   clockSetup();
   trains = 3;
   days = 0;
   trainAddRate = 3;
   speed = 1;
+  pool = 2; // starting number of people at a station
   stations = new ArrayList<Station>();
   rails = new ArrayList<Line>();
 //  rivers = new ArrayList<River>();
@@ -62,6 +63,7 @@ void draw(){
   background(255);
   for(Station i : stations){
     makeStation(i.getX(), i.getY(), i.getType()); // param three is type
+    i.addPeople((int) random(pool));
   }
   for(int x = 0; x < rails.size(); x++){
     drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY(), rails.get(x).getColor1(), rails.get(x).getColor2(), rails.get(x).getColor3());
@@ -137,8 +139,8 @@ void draw(){
         secondStats = i;
         secondStatX = i.getX();
         secondStatY = i.getY();
-      }      
-      alreadyTried = false; 
+      }
+      alreadyTried = false;
       }
     if(firstStat && secondStat){
     rails.add(new Line(c1, c2, c3, firstStatX, firstStatY, secondStatX, secondStatY, false));
@@ -157,7 +159,7 @@ void draw(){
     firstStats = null;
     secondStats = null;
   }
-  }          
+  }
   for(int x = 0; x < screens.size(); x++){
   useUpgrades(screens.get(x).getTunnels(), screens.get(x).getXtraCar(), screens.get(x).getXtraTrain());
   int removedT = getRemovedT();
@@ -192,7 +194,7 @@ void draw(){
   strokeWeight(2);
   ellipse(width / 2, height - 230, 20 ,20);
   previousDay = day;
-  tick(); 
+  tick();
   days++;
 }
 
@@ -205,9 +207,9 @@ void keyPressed(){
     choice = 0;
   }
 }
-  
+
 
 /* Right now an extra rail can be drawn from any station that has a rail going through it not just the endpoint of the rail so we have to fix that.
 This can be done by referring to the colors of the lines that will be changed later.
-Also we have to 
+Also we have to
 */
