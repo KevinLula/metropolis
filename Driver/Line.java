@@ -1,12 +1,16 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 public class Line{
   ArrayList<Station> stations;
+  ArrayList<Train> trains;
   int color1, color2, color3;
   int startX, startY, endX, endY;// rgb
   int tunnels;
   
-  public Line(int color1, int color2, int color3, int startX, int startY, int endX, int endY){
+  public Line(int color1, int color2, int color3, int startX, int startY, int endX, int endY, boolean reverse){
     stations = new ArrayList<Station>();
+    trains = new ArrayList<Train>();
+    trains.add(new Train(this, startX, startY, endX, endY, reverse));
     this.color1 = color1;
     this.color2 = color2;
     this.color3 = color3;
@@ -62,5 +66,18 @@ public class Line{
   int getColor3(){
     return color3;
   }
+  
+  public ArrayList<Train> returnTrains(){
+    return trains;
+  }
+  
+  public Station getStation(int x, int y){
+        for(Station i : stations){
+       if(i.getX() == x && i.getY() == y){
+         return i;
+       }
+     }
+     throw new NoSuchElementException();
+   }
 }  
   

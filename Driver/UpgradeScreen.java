@@ -3,8 +3,6 @@ int tunnels = 0;
 int rail = 0;
 int xtraTrain = 0;
 int xtraCar =0 ;
-int wide = 0;
-int high = 0;
 
 public UpgradeScreen(int tunnels, int rail, int xtraTrain, int xtraCar){
   this.tunnels = tunnels;

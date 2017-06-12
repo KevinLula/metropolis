@@ -1,13 +1,11 @@
 public class River{
-  double x, y;
-  int width, height;
-  String type;
-  public River(double x, double y, int width, int height, String type){
+  int x, y;
+  int wide;
+  
+  public River(int x, int y, int wide){
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
-    this.type = type;
+    this.wide = wide;
   }
   
 }

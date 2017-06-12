@@ -28,7 +28,6 @@ float endLineY = 0.0;
   stroke(strokeColor1, strokeColor2, strokeColor3);
   strokeWeight(5); 
   line(startX, startY, endX, endY);
-  rect(int((startX + endX) / 2) - 4, int((startY + endY) / 2) - 4, 7, 7);
   }
   
   int getStartLineX(){

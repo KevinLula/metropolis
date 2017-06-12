@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 public class Station{
   private int size, x, y, people, type;
   private String name;
@@ -72,6 +73,19 @@ public class Station{
   public int getLineSize(){
     return lines.size();
   }
+  
+  public ArrayList<Line> getLines(){
+    return lines;
+  }
+  
+  public Line getLine(int color1, int color2, int color3){
+        for(Line i : lines){
+        if(i.getColor1() == color1 && i.getColor2() == color2 && i.getColor3() == color3){
+         return i;
+       }
+     }
+     throw new NoSuchElementException();
+   }
   
   public int compareTo(Station other){
     return 0; // for now, will use if the interactive selective function of line doesn't work

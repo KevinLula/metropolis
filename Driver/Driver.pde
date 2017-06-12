@@ -19,27 +19,24 @@ int firstStatX, firstStatY, secondStatX, secondStatY;
 int numRivers;
 int daysPassed;
 int choice = 0;
+int trains;
+int days;
+int trainAddRate, speed;
 
 void settings(){
   fullScreen();
 }
 
 void setup(){
-/*  if(rails.size() <= 3){
-    howManyRails = rails.size();
-  }
-  else{
-  for(int x = 0; x < rails.size(); x++){
-    for(int y = 1; y < rails.size(); y++){
-      if(rails.get(x).getColor1() - rails.get(y).getColor1() != 0 && rails.get(x).getColor2() - rails.get(y).getColor2() != 0 && rails.get(x).getColor3() - rails.get(y).getColor3() != 0){
-        howManyRails ++;
-      }
-    }
-  }
-  } */
+star = loadImage("star.png");
+plus = loadImage("plus.png");
         
   //time = new Clock();
   clockSetup();
+  trains = 3;
+  days = 0;
+  trainAddRate = 3;
+  speed = 1;
   stations = new ArrayList<Station>();
   rails = new ArrayList<Line>();
 //  rivers = new ArrayList<River>();
@@ -53,9 +50,12 @@ void setup(){
   }
 }
 void draw(){
+  if(days % trainAddRate == 0){
+    trains ++;
+  }
   int howManyRails = 0;
   if(!day.equals(previousDay)){
-    stations.add(new Station((int)random(width), (int)random(height), streets[(int)random(46)], (int)random(3)));
+    stations.add(new Station((int)random(width), (int)random(height), streets[(int)random(46)], (int)random(5)));
     daysPassed++;
     upgradeAdded = false;
   }
@@ -66,6 +66,15 @@ void draw(){
   for(int x = 0; x < rails.size(); x++){
     drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY(), rails.get(x).getColor1(), rails.get(x).getColor2(), rails.get(x).getColor3());
   }
+   for(Line i : rails){
+     ArrayList<Train> trainList = i.returnTrains();
+     for(Train j : trainList){
+       displayTrain(j.getX(), j.getY());
+       if(j.move(speed)){
+         j.putInReverse();
+       }
+     }
+   }
 //  for(int x = 0; x < rivers.size()){
 //    drawLine(
  if(screens.get(0).getRail() > 0){
@@ -88,7 +97,8 @@ void draw(){
       alreadyTried = false;
     }
     if(firstStat && secondStat){
-    rails.add(new Line(int(random(256)), int(random(256)), int(random(256)), firstStatX, firstStatY, secondStatX, secondStatY));
+    rails.add(new Line(int(random(256)), int(random(256)), int(random(256)), firstStatX, firstStatY, secondStatX, secondStatY, false));
+    trains --;
     rails.get(rails.size() - 1).addStation(firstStats);
     rails.get(rails.size() - 1).addStation(secondStats);
     firstStats.addLines(rails.get(rails.size() - 1));
@@ -131,7 +141,7 @@ void draw(){
       alreadyTried = false; 
       }
     if(firstStat && secondStat){
-    rails.add(new Line(c1, c2, c3, firstStatX, firstStatY, secondStatX, secondStatY));
+    rails.add(new Line(c1, c2, c3, firstStatX, firstStatY, secondStatX, secondStatY, false));
     rails.get(rails.size() - 1).addStation(firstStats);
     rails.get(rails.size() - 1).addStation(secondStats);
     firstStats.addLines(rails.get(rails.size() - 1));
@@ -182,7 +192,8 @@ void draw(){
   strokeWeight(2);
   ellipse(width / 2, height - 230, 20 ,20);
   previousDay = day;
-  tick();   
+  tick(); 
+  days++;
 }
 
 void keyReleased(){
