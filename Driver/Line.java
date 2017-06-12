@@ -54,6 +54,18 @@ public class Line{
     return (int)(endY);
   }
 
+  int getColor1(){
+    return color1;
+  }
+
+  int getColor2(){
+    return color2;
+  }
+
+  int getColor3(){
+    return color3;
+  }
+
   public ArrayList<Train> returnTrains(){
     return trains;
   }

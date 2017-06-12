@@ -43,6 +43,7 @@ public class Train{
         endX = startX;
         startX = temp;
     }
+    System.out.println(slope);
     x = x + speed;
     y = y + (slope() * speed);
     if(distance(x, endX, y, endY) < 15){
@@ -62,7 +63,8 @@ public class Train{
     return (int) Math.sqrt(Math.pow(x2-x1, 2)+Math.pow(y2-y1, 2));
   }
   private double slope(){
-    return (endY-startY)/(endX-startX);
+    System.out.println("END Y: "+endY+" START Y: "+startY+" END X:"+endX+" START X:"+startX);
+    return (1.0*endY-1.0*startY)/(1.0*endX-1.0*startX);
   }
   /*private double unitFind(){
     if(endY - startY > endX - startX){

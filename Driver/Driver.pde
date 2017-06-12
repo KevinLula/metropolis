@@ -40,13 +40,15 @@ void draw(){
     makeStation(i.getX(), i.getY(), i.getType()); // param three is type
   }
   for(int x = 0; x < rails.size(); x++){
-    drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY());
+    drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY(), rails.get(x).getColor1(), rails.get(x).getColor2(), rails.get(x).getColor3());
   }
   for(Line i : rails){
     ArrayList<Train> trainList = i.returnTrains();
     for(Train j : trainList){
       displayTrain(j.getX(), j.getY());
-      j.move(speed);
+      if(j.move(speed)){
+        j.putInReverse();
+      }
     }
   }
   drawLines();
