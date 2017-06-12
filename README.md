@@ -5,7 +5,7 @@ The train stimulation game is based off the game Mini Metro by the New Zealand g
 ## Devlog
 - [x] Begin Project
 - [ ] Create MVP
-- [ ] Add interactivity
+- [x] Add interactivity
 - [ ] Create main menu
 - [ ] Use different pathfinding algorithms for the people
 - [ ] Create population density maps
@@ -15,7 +15,10 @@ The train stimulation game is based off the game Mini Metro by the New Zealand g
 - [ ] Licensing
 - [x] README & devlog
 
+Thursday June 1st - Kevin learned how to make a clock by rotating a circle and rectangle.
 Friday June 2nd - did work on Station and People classes
+Monday June 5th - continued work on basic classes. Jonathan further burnished the station class, added the World class, and added the People class.
+Friday June 9th - the lines are now clickable
 ## Features
 The single player starts off the game with 3 railways that he/she can place connecting any of the continously spawning stations. With each passing day a new station spawns which must be accounted for in some manner so that overcrowding does not occur. In order to account for stations lines must be extended to them so that the trains on that line can reach said station and assist the people of that station to get to their desired location. If a station does get overcrowded then the player will lose the game. Upgrades to the players subway system are given randomly every week. These upgrades either give the player a new railway, an additional train to place on any railway, or a train car to attach to a pre-existing traincar. The player can see what upgrades he/she has available by clicking the white dot located on the bottom half of the screen. The images represent the available railways, trains, and train cars (respectively left to right) that the player can use to benefit their subway system.
 ## Operating the Game
