@@ -42,12 +42,23 @@ public class Train{
         int temp = endX;
         endX = startX;
         startX = temp;
+        int temp2 = endY;
+        endY = startY;
+        startY = temp2;
     }
-    System.out.println(slope);
-    x = x + speed;
-    y = y + (slope() * speed);
-    if(distance(x, endX, y, endY) < 15){
+    //System.out.println(slope);
+    if(reverse){ // go the opp direction
+      x = x - speed;
+      y = y - (slope() * speed);
+    }
+    else{
+      x = x + speed;
+      y = y + (slope() * speed);
+    }
+    System.out.println(distance(x, startX, y, startY)); // doesn't matter because we're switching
+    if(distance(x, startX, y, startY) < 20){
       returned = true;
+      System.out.println("reached here");
     }
     else{
       returned = false;
@@ -56,6 +67,9 @@ public class Train{
       int temp = endX;
       endX = startX;
       startX = temp;
+      int temp2 = endY;
+      endY = startY;
+      startY = temp2;
     }
     return returned;
   }
@@ -63,7 +77,7 @@ public class Train{
     return (int) Math.sqrt(Math.pow(x2-x1, 2)+Math.pow(y2-y1, 2));
   }
   private double slope(){
-    System.out.println("END Y: "+endY+" START Y: "+startY+" END X:"+endX+" START X:"+startX);
+    //System.out.println("END Y: "+endY+" START Y: "+startY+" END X:"+endX+" START X:"+startX);
     return (1.0*endY-1.0*startY)/(1.0*endX-1.0*startX);
   }
   /*private double unitFind(){
