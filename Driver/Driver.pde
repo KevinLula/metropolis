@@ -21,7 +21,7 @@ int daysPassed;
 int choice = 0;
 int trains;
 int days;
-int trainAddRate, speed, pool;
+int trainAddRate, speed, pool, pop;
 
 void settings(){
   fullScreen();
@@ -38,6 +38,7 @@ plus = loadImage("plus.png");
   trainAddRate = 3;
   speed = 1;
   pool = 2; // starting number of people at a station
+  pop = pool;
   stations = new ArrayList<Station>();
   rails = new ArrayList<Line>();
 //  rivers = new ArrayList<River>();
@@ -52,7 +53,7 @@ plus = loadImage("plus.png");
 }
 void draw(){
   if(days % trainAddRate == 0){
-    trains ++;
+    trains++;
   }
   int howManyRails = 0;
   if(!day.equals(previousDay)){
@@ -63,7 +64,9 @@ void draw(){
   background(255);
   for(Station i : stations){
     makeStation(i.getX(), i.getY(), i.getType()); // param three is type
-    i.addPeople((int) random(pool));
+    int quantity = random(pool);
+    i.addPeople((int) quantity);
+    pop += quantity;
   }
   for(int x = 0; x < rails.size(); x++){
     drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY(), rails.get(x).getColor1(), rails.get(x).getColor2(), rails.get(x).getColor3());
