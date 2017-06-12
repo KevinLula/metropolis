@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 public class Line{
   ArrayList<Station> stations;
   ArrayList<Train> trains;
@@ -27,6 +28,15 @@ public class Line{
       stations.add(station);
       // processing graphics part
     }
+  }
+
+  public Station getStation(int x, int y){
+    for(Station i : stations){
+      if(i.getX() == x && i.getY() == y){
+        return i;
+      }
+    }
+    throw new NoSuchElementException();
   }
 
   public void removeStation(Station station){
