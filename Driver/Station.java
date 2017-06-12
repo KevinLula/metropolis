@@ -69,24 +69,27 @@ public class Station{
   public int getType(){
     return this.type;
   }
-  
+
   public int getLineSize(){
     return lines.size();
   }
-  
+
   public ArrayList<Line> getLines(){
     return lines;
   }
-  
-  public Line getLine(int color1, int color2, int color3){
+
+  public Line getLine(int color1, int color2, int color3, Line other){
+      if(lines.size() == 1){
+        throw new NoSuchElementException();
+      }
         for(Line i : lines){
-        if(i.getColor1() == color1 && i.getColor2() == color2 && i.getColor3() == color3){
+        if(i.getColor1() == color1 && i.getColor2() == color2 && i.getColor3() == color3 && i != other){
          return i;
        }
      }
      throw new NoSuchElementException();
    }
-  
+
   public int compareTo(Station other){
     return 0; // for now, will use if the interactive selective function of line doesn't work
   }

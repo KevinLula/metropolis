@@ -56,15 +56,16 @@ public class Train{
       x = x + speed;
       y = y + (slope() * speed);
     }
-    System.out.println(distance(x, startX, y, startY)); // doesn't matter because we're switching
+    //System.out.println(distance(x, startX, y, startY)); // doesn't matter because we're switching
     Station temp3;
     Line temp4;
+    Station temp5;
     if(distance(x, startX, y, startY) < 30){
       try{ // we live so dangerously, this is admittedly hacky, but because of the floating point error that
         //took an entire day, I was unable to create a distinct subclass called rails that would usurp lines,
         // with lines being each individual part of the rails, sorry, but legitimately no time
         temp3 = line.getStation(startX, startY);
-        temp4 = temp3.getLine(line.getColor1(), line.getColor2(), line.getColor3());
+        temp4 = temp3.getLine(line.getColor1(), line.getColor2(), line.getColor3(), line);
         if(startX != temp4.getStartX() && startY != temp4.getStartY()){
           startX = temp4.getStartX();
           startY = temp4.getStartY();
@@ -76,7 +77,7 @@ public class Train{
         endX = (int) x;
         endY = (int) y;
       }
-      catch(NoSuchElementException e){
+      catch(Exception e){
         returned = true;
       }
     }
