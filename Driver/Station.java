@@ -29,9 +29,9 @@ public class Station{
       throw new IllegalArgumentException();
     }
     this.people += people;
-    for(int i = 0; i < people; i++){
-      persons.add(new Person(this, ));
-    }
+    //for(int i = 0; i < people; i++){
+      //persons.add(new Person(this, ));
+    //}
   }
   public void removePeople(int people){
     if(this.people - people < 0){
