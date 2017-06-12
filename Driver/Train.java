@@ -5,6 +5,7 @@ public class Train{
   double x, y;
   int people, startX, startY, endX, endY;
   boolean toStart, toEnd, reverse;
+  boolean destination = false;
   Line line;
   Station lastStation;
   Vector lineVector, location;
@@ -39,7 +40,7 @@ public class Train{
     int distance = distance((double) endX, startX, (double) endY, startY);
     double slope = slope();
     //double unitDistance = unitFind();
-    if(reverse){
+    if(destination){
         int temp = endX;
         endX = startX;
         startX = temp;
@@ -47,21 +48,15 @@ public class Train{
         endY = startY;
         startY = temp2;
     }
-    //System.out.println(slope);
-    if(reverse){ // go the opp direction
-      x = x - speed;
-      y = y - (slope() * speed);
-    }
-    else{
-      x = x + speed;
-      y = y + (slope() * speed);
-    }
+    //System.out.println(slope);// go the opp direction
+      x = x + (slopeX() / 300);
+      y = y + (slopeY() / 300);
     //System.out.println(distance(x, startX, y, startY)); // doesn't matter because we're switching
     Station temp3;
     Line temp4;
     Station temp5;
-    if(distance(x, startX, y, startY) < 30){
-      try{ // we live so dangerously, this is admittedly hacky, but because of the floating point error that
+    if(distance(x, endX, y, endY) < 30){
+/*      try{ // we live so dangerously, this is admittedly hacky, but because of the floating point error that
         //took an entire day, I was unable to create a distinct subclass called rails that would usurp lines,
         // with lines being each individual part of the rails, sorry, but legitimately no time
         temp3 = line.getStation(startX, startY);
@@ -79,19 +74,20 @@ public class Train{
       }
       catch(Exception e){
         returned = true;
-      }
+      } */
+      destination = true;
     }
     else{
-      returned = false;
+      destination = false;
     }
-    if(reverse){
+/*    if(reverse){
       int temp = endX;
       endX = startX;
       startX = temp;
       int temp2 = endY;
       endY = startY;
       startY = temp2;
-    }
+    } */
     return returned;
   }
   private int distance(double x1, int x2, double y1, int y2){
@@ -100,6 +96,14 @@ public class Train{
   private double slope(){
     //System.out.println("END Y: "+endY+" START Y: "+startY+" END X:"+endX+" START X:"+startX);
     return (1.0*endY-1.0*startY)/(1.0*endX-1.0*startX);
+  }
+  
+  private double slopeX(){
+    return (1.0*endX - 1.0*startX);
+  }
+  
+  private double slopeY(){
+    return (1.0*endY - 1.0*startY);
   }
   /*private double unitFind(){
     if(endY - startY > endX - startX){
