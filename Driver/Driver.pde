@@ -11,6 +11,9 @@ ArrayList<Line> rails;
 boolean firstStat = false;
 boolean secondStat = false;
 boolean alreadyTried = false;
+int trains;
+int days;
+int trainAddRate, speed;
 
 void settings(){
   fullScreen();
@@ -20,8 +23,15 @@ void setup(){
   clockSetup();
   stations = new ArrayList<Station>();
   rails = new ArrayList<Line>();
+  trains = 3; // number of trains
+  days = 0;
+  trainAddRate = 3; // every x days a new train is added
+  speed = 2; // how fast the trains go
 }
 void draw(){
+  if(days % trainAddRate == 0){
+    trains++;
+  }
   if(!day.equals(previousDay)){
     stations.add(new Station((int)random(width), (int)random(height), streets[(int)random(46)], (int)random(3)));
   }
@@ -31,6 +41,13 @@ void draw(){
   }
   for(int x = 0; x < rails.size(); x++){
     drawLine(rails.get(x).getStartX(), rails.get(x).getStartY(), rails.get(x).getEndX(), rails.get(x).getEndY());
+  }
+  for(Line i : rails){
+    ArrayList<Train> trainList = i.returnTrains();
+    for(Train j : trainList){
+      displayTrain(j.getX(), j.getY());
+      j.move(speed);
+    }
   }
   drawLines();
   if(getEndLineX() != 0){
@@ -45,7 +62,8 @@ void draw(){
       alreadyTried = false;
     }
     if(firstStat && secondStat){
-    rails.add(new Line(0, 0, 0, getStartLineX(), getStartLineY(), getEndLineX(), getEndLineY()));
+      rails.add(new Line(0, 0, 0, getStartLineX(), getStartLineY(), getEndLineX(), getEndLineY(), false));
+      trains--;
     }
     setStartLineX(0);
     setStartLineY(0);
@@ -57,4 +75,5 @@ void draw(){
   previousDay = day;
   strokeWeight(2);
   tick();
+  days++;
 }
